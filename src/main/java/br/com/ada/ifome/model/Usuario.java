@@ -1,6 +1,6 @@
-package br.com.ada.ifome.usuario;
+package br.com.ada.ifome.model;
 
-import br.com.ada.ifome.endereco.Endereco;
+import br.com.ada.ifome.enumeration.TipoDeDocumento;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -13,7 +13,11 @@ public class Usuario {
     private Long id;
     private String nome;
     @Column(unique = true, nullable = false)
-    private String cpf;
+    private String numeroDeDocumento;
+
+    @Column(unique = true, nullable = false)
+    private TipoDeDocumento tipoDocumento;
+
     private String email;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_id", referencedColumnName = "id")

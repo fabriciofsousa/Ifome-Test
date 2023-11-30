@@ -1,4 +1,4 @@
-package br.com.ada.ifome.endereco;
+package br.com.ada.ifome.model;
 
 import lombok.Data;
 

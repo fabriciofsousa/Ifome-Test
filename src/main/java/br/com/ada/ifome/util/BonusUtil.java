@@ -1,6 +1,6 @@
-package br.com.ada.ifome.pessoa;
+package br.com.ada.ifome.util;
 
-public class Bonus {
+public class BonusUtil {
     public double calcularBonus(int vitaminas, int xaropes, double salario) {
         double bonus = 0;
         if (vitaminas > 20 && xaropes > 5) {

@@ -1,8 +1,6 @@
-package br.com.ada.ifome.pessoa;
+package br.com.ada.ifome.dto;
 
-import lombok.Data;
-
-public class Pessoa {
+public class PessoaDTO {
     private String cpf;
 
     public String getCpf() {
