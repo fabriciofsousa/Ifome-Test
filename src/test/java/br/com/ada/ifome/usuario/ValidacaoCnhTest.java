@@ -63,4 +63,15 @@ public class ValidacaoCnhTest {
         // Validar se foi chamado o save do repository
         verify(usuarioRepository, Mockito.times(1)).save(usuario);
     }
+
+     @Test
+       public void usuarioCnhInvalidaDataVencimento() {
+        var usuario = new Usuario();
+        usuario.setTipoDocumento(TipoDeDocumento.CNH);
+        Date dataAtual = new Date();
+        SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
+        String dataInput = "28/02/2023";
+        Date dataFornecida = formatoData.parse(dataInput);
+        assertThrows(CnhInvalidoException.class, () -> usuarioService.salvar(usuario))
+    }
 }
