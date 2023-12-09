@@ -3,6 +3,8 @@ package br.com.ada.ifome.usuario;
 import br.com.ada.ifome.enumeration.TipoDeDocumento;
 import br.com.ada.ifome.model.Usuario;
 import br.com.ada.ifome.exceptions.CpfInvalidoException;
+import br.com.ada.ifome.model.documents.CNH;
+import br.com.ada.ifome.model.documents.Documento;
 import br.com.ada.ifome.repository.UsuarioRepository;
 import br.com.ada.ifome.service.UsuarioService;
 import org.junit.jupiter.api.Test;
@@ -10,6 +12,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.time.LocalDate;
+import java.time.Month;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -50,11 +56,20 @@ public class ValidacaoCpfTest {
         usuario.setTipoDocumento(TipoDeDocumento.CPF);
         usuario.setNumeroDeDocumento("04455566633");
         when(usuarioRepository.save(any())).thenReturn(usuario);
+        criarDataExpedicao(usuario);
         var usuarioSalvo = usuarioService.salvar(usuario);
 
         assertNotNull(usuarioSalvo);
         // Validar se foi chamado o save do repository
         verify(usuarioRepository, Mockito.times(1)).save(usuario);
+    }
+
+    private static void criarDataExpedicao(Usuario usuario) {
+        LocalDate dataExpedicao = LocalDate.of(2030, Month.FEBRUARY, 28);
+        Documento cnh = new CNH();
+        cnh.setDataExpedicao(dataExpedicao);
+
+        usuario.setDocumentos(List.of(cnh));
     }
 
 }

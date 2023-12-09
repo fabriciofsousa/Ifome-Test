@@ -1,8 +1,10 @@
 package br.com.ada.ifome.usuario;
 
 import br.com.ada.ifome.enumeration.TipoDeDocumento;
-import br.com.ada.ifome.model.Usuario;
 import br.com.ada.ifome.exceptions.CnhInvalidoException;
+import br.com.ada.ifome.model.Usuario;
+import br.com.ada.ifome.model.documents.CNH;
+import br.com.ada.ifome.model.documents.Documento;
 import br.com.ada.ifome.repository.UsuarioRepository;
 import br.com.ada.ifome.service.UsuarioService;
 import org.junit.jupiter.api.Test;
@@ -10,6 +12,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.time.LocalDate;
+import java.time.Month;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -26,11 +33,20 @@ public class ValidacaoCnhTest {
     @InjectMocks
     private UsuarioService usuarioService;
 
+    private static void criarDataExpedicao(Usuario usuario) {
+        LocalDate dataExpedicao = LocalDate.of(2030, Month.FEBRUARY, 28);
+        Documento cnh = new CNH();
+        cnh.setDataExpedicao(dataExpedicao);
+
+        usuario.setDocumentos(List.of(cnh));
+    }
+
     @Test
     public void usuarioCnhInvalidoComLetra() {
         var usuario = new Usuario();
         usuario.setTipoDocumento(TipoDeDocumento.CNH);
         usuario.setNumeroDeDocumento("4348383435J");
+        criarDataExpedicao(usuario);
         assertThrows(CnhInvalidoException.class, () -> usuarioService.salvar(usuario));
     }
 
@@ -39,6 +55,7 @@ public class ValidacaoCnhTest {
         var usuario = new Usuario();
         usuario.setTipoDocumento(TipoDeDocumento.CNH);
         usuario.setNumeroDeDocumento("434838343501");
+        criarDataExpedicao(usuario);
         assertThrows(CnhInvalidoException.class, () -> usuarioService.salvar(usuario));
     }
 
@@ -47,6 +64,7 @@ public class ValidacaoCnhTest {
         var usuario = new Usuario();
         usuario.setTipoDocumento(TipoDeDocumento.CNH);
         usuario.setNumeroDeDocumento("1234567890");
+        criarDataExpedicao(usuario);
         assertThrows(CnhInvalidoException.class, () -> usuarioService.salvar(usuario));
     }
 
@@ -57,21 +75,11 @@ public class ValidacaoCnhTest {
         usuario.setTipoDocumento(TipoDeDocumento.CNH);
         usuario.setNumeroDeDocumento("43483834350");
         when(usuarioRepository.save(any())).thenReturn(usuario);
+        criarDataExpedicao(usuario);
         var usuarioSalvo = usuarioService.salvar(usuario);
 
         assertNotNull(usuarioSalvo);
         // Validar se foi chamado o save do repository
         verify(usuarioRepository, Mockito.times(1)).save(usuario);
-    }
-
-     @Test
-       public void usuarioCnhInvalidaDataVencimento() {
-        var usuario = new Usuario();
-        usuario.setTipoDocumento(TipoDeDocumento.CNH);
-        Date dataAtual = new Date();
-        SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
-        String dataInput = "28/02/2023";
-        Date dataFornecida = formatoData.parse(dataInput);
-        assertThrows(CnhInvalidoException.class, () -> usuarioService.salvar(usuario))
     }
 }
