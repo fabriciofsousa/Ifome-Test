@@ -1,6 +1,6 @@
 package br.com.ada.ifome.model.documents;
 
-import br.com.ada.ifome.exceptions.DataExpedicaoInvalida;
+import br.com.ada.ifome.exceptions.usuario.DataExpedicaoInvalida;
 import br.com.ada.ifome.model.Usuario;
 import lombok.*;
 

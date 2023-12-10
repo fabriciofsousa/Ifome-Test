@@ -1,7 +1,10 @@
 package br.com.ada.ifome.usuario;
 
+import br.com.ada.ifome.enumeration.InstituicaoBancaria;
+import br.com.ada.ifome.enumeration.TipoConta;
 import br.com.ada.ifome.enumeration.TipoDeDocumento;
-import br.com.ada.ifome.exceptions.CnhInvalidoException;
+import br.com.ada.ifome.exceptions.usuario.CnhInvalidoException;
+import br.com.ada.ifome.model.ContaBancaria;
 import br.com.ada.ifome.model.Usuario;
 import br.com.ada.ifome.model.documents.CNH;
 import br.com.ada.ifome.model.documents.Documento;
@@ -75,6 +78,13 @@ public class ValidacaoCnhTest {
         usuario.setTipoDocumento(TipoDeDocumento.CNH);
         usuario.setNumeroDeDocumento("43483834350");
         when(usuarioRepository.save(any())).thenReturn(usuario);
+        ContaBancaria contaBancaria = new ContaBancaria();
+        contaBancaria.setNumeroAgencia(1234L);
+        contaBancaria.setNumeroConta(456);
+        contaBancaria.setTipoConta(TipoConta.CONTA_CORRENTE);
+        contaBancaria.setInstituicaoBancaria(InstituicaoBancaria.SANTANDER);
+
+        usuario.setContasBancarias(Arrays.asList(contaBancaria));
         criarDataExpedicao(usuario);
         var usuarioSalvo = usuarioService.salvar(usuario);
 

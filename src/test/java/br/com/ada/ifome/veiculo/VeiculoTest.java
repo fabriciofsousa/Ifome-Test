@@ -1,9 +1,9 @@
 package br.com.ada.ifome.veiculo;
 
-import br.com.ada.ifome.exceptions.VeiculoDataModeloInvalidoException;
-import br.com.ada.ifome.exceptions.VeiculoInvalidoException;
-import br.com.ada.ifome.exceptions.VeiculoPlacaVeiculoInvalidoException;
-import br.com.ada.ifome.exceptions.VeiculoRenavamInvalidoException;
+import br.com.ada.ifome.exceptions.veiculo.VeiculoDataModeloInvalidoException;
+import br.com.ada.ifome.exceptions.veiculo.VeiculoInvalidoException;
+import br.com.ada.ifome.exceptions.veiculo.VeiculoPlacaVeiculoInvalidoException;
+import br.com.ada.ifome.exceptions.veiculo.VeiculoRenavamInvalidoException;
 import br.com.ada.ifome.model.Veiculo;
 import br.com.ada.ifome.repository.VeiculoRepository;
 import br.com.ada.ifome.service.VeiculoService;

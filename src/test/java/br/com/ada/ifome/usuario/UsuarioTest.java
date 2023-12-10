@@ -1,6 +1,6 @@
 package br.com.ada.ifome.usuario;
 
-import br.com.ada.ifome.exceptions.UsuarioInvalidoException;
+import br.com.ada.ifome.exceptions.usuario.UsuarioInvalidoException;
 import br.com.ada.ifome.repository.UsuarioRepository;
 import br.com.ada.ifome.service.UsuarioService;
 import org.junit.jupiter.api.Test;

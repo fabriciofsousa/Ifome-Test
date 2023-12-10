@@ -1,8 +1,8 @@
 package br.com.ada.ifome.enumeration;
 
-import br.com.ada.ifome.exceptions.CnhInvalidoException;
-import br.com.ada.ifome.exceptions.CpfInvalidoException;
-import br.com.ada.ifome.exceptions.RgInvalidoException;
+import br.com.ada.ifome.exceptions.usuario.CnhInvalidoException;
+import br.com.ada.ifome.exceptions.usuario.CpfInvalidoException;
+import br.com.ada.ifome.exceptions.usuario.RgInvalidoException;
 import lombok.Getter;
 
 @Getter

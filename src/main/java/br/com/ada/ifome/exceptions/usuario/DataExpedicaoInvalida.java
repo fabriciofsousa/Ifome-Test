@@ -1,4 +1,4 @@
-package br.com.ada.ifome.exceptions;
+package br.com.ada.ifome.exceptions.usuario;
 
 public class DataExpedicaoInvalida extends RuntimeException {
 

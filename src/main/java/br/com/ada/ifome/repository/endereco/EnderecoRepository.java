@@ -1,4 +1,4 @@
-package br.com.ada.ifome.endereco;
+package br.com.ada.ifome.repository.endereco;
 
 import br.com.ada.ifome.model.Endereco;
 import org.springframework.data.jpa.repository.JpaRepository;
